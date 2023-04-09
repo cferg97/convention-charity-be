@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import autoIncrement from "mongoose-auto-increment";
+
 
 const { Schema, model } = mongoose;
 
@@ -14,11 +14,5 @@ const mainSchema = new Schema(
   { timestamps: true }
 );
 
-mainSchema.plugin(autoIncrement.plugin, {
-  model: "charityItems",
-  field: "itemNumber",
-  startAt: 1,
-  incrementBy: 1,
-});
 
 export default model("charityItems", mainSchema);
