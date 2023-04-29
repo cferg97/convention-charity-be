@@ -31,7 +31,7 @@ mainRouter.post("/", cloudinaryUpload, async (req, res, next) => {
     const { itemName, itemDesc, submitterName, image } =
       await submission.save();
 
-    const updateDocument = await docs.documents.batchUpdate({
+    const updateDocument = docs.documents.batchUpdate({
       documentId: process.env.DOCUMENT_ID,
       requestBody: {
         requests: [
@@ -44,6 +44,8 @@ mainRouter.post("/", cloudinaryUpload, async (req, res, next) => {
         ],
       },
     });
+
+    await updateDocument();
 
     res.status(201).send();
   } catch (err) {
