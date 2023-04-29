@@ -4,7 +4,8 @@ import express from "express";
 import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v2 as cloudinary } from "cloudinary";
-
+import { getPDFReadableStream } from "../lib/pdf-tools.js";
+import { pipeline } from "stream";
 
 const mainRouter = express.Router();
 
@@ -23,10 +24,14 @@ mainRouter.post("/", cloudinaryUpload, async (req, res, next) => {
       ...req.body,
       image: req.file.path,
     });
-    const { itemName, itemDesc, submitterName, image } =
-      await submission.save();
+    const finalSub = await submission.save();
 
-    res.status(201).send();
+    res.setHeader("Content-Disposition", "attachment; filename=item_sub.pdf");
+    const source = await getPDFReadableStream(finalSub);
+    const destination = res;
+    pipeline(source, destination, (err) => {
+      if (err) console.log(err);
+    });
   } catch (err) {
     next(err);
   }
