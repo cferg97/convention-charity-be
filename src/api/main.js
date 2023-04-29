@@ -43,10 +43,13 @@ mainRouter.post("/", cloudinaryUpload, async (req, res, next) => {
       to: "c.ferguson1997@gmail.com",
       subject: "New Charity Submission",
       text: "There has been a new charity submission, see attached pdf.",
-      attachments: [{
-        filename: "submission.pdf",
-        content: pdf,
-      }],
+      attachments: [
+        {
+          filename: "submission.pdf",
+          type: "application/pdf",
+          content: pdf,
+        },
+      ],
     };
     transporter.sendMail(mailOptions, function (err) {
       if (err) {
