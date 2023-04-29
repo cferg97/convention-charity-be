@@ -32,14 +32,21 @@ export const getPDFReadableStream = async (input) => {
         text: "Submitted By: " + input.submitterName,
         style: "header",
       },
+      {
+        image: "item",
+      },
     ],
     images: {
       item: await createBase64(input.image),
+      style: "center",
     },
     styles: {
       header: {
         fontSize: 18,
         bold: true,
+        alignment: "center",
+      },
+      center: {
         alignment: "center",
       },
     },
