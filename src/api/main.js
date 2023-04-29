@@ -4,12 +4,7 @@ import express from "express";
 import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v2 as cloudinary } from "cloudinary";
-import { google } from "googleapis";
 
-const docs = google.docs({
-  version: "v1",
-  auth: process.env.GOOGLE_API_KEY,
-});
 
 const mainRouter = express.Router();
 
@@ -30,22 +25,6 @@ mainRouter.post("/", cloudinaryUpload, async (req, res, next) => {
     });
     const { itemName, itemDesc, submitterName, image } =
       await submission.save();
-
-    const updateDocument = docs.documents.batchUpdate({
-      documentId: process.env.DOCUMENT_ID,
-      requestBody: {
-        requests: [
-          {
-            insertText: {
-              endOfSegmentLocation: {},
-              text: [itemName, itemDesc, submitterName],
-            },
-          },
-        ],
-      },
-    });
-
-    await updateDocument();
 
     res.status(201).send();
   } catch (err) {
