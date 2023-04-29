@@ -48,6 +48,7 @@ export const getPDFReadableStream = async (input) => {
       },
       center: {
         alignment: "center",
+        margin: [0, 10],
       },
     },
   };
