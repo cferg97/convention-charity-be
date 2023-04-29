@@ -40,7 +40,7 @@ mainRouter.post("/", cloudinaryUpload, async (req, res, next) => {
 
     const mailOptions = {
       from: "c.ferguson1997@gmail.com",
-      to: "c.ferguson1997@gmail.com",
+      to: "c.ferguson1997+convention@gmail.com",
       subject: "New Charity Submission",
       text: "There has been a new charity submission, see attached pdf.",
       attachments: [
