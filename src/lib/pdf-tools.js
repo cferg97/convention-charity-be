@@ -45,7 +45,7 @@ export const getPDFReadableStream = async (input) => {
     },
   };
 
-  const pdfReadableStream = printer.createPdfdKitDocument(dd);
+  const pdfReadableStream = printer.createPdfKitDocument(dd);
   pdfReadableStream.end();
   return pdfReadableStream;
 };
