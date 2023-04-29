@@ -35,11 +35,13 @@ export const getPDFReadableStream = async (input) => {
       {
         image: "item",
       },
+      {
+        text: "link to image: " + input.image,
+      },
     ],
     images: {
       item: await createBase64(input.image),
-      width: 500,
-      style: "center",
+      width: 200,
     },
     styles: {
       header: {
