@@ -39,7 +39,7 @@ export const getPDFReadableStream = async (input) => {
       },
       {
         text: "link to image: ",
-        link: image,
+        link: input.image,
       },
     ],
     images: {
